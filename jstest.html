@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Test</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"
+</head>
+<body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="calc.html">Calc</a></li>
+          <li><a class="active" href="jstest.html">JsTest</a></li>
+        </ul>
+        
+      </nav>
+    </header>
+  <h1 style="margin-top:50px">Button Counter</h1>
+    <button onclick="increment()">Click me!</button>
+    <p>Count: <span id="count">0</span></p>
+    
+    <script>
+      var count = 0;
+      
+      function increment() {
+        count++;
+        document.getElementById("count").innerHTML = count;
+      }
+    </script>
+</body>
+</html>
