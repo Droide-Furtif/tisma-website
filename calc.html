@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Titre de la page</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="calc.css">
 </head>
 <body>
   <header>
@@ -20,27 +21,79 @@
   
   <div class="calc_grid">
     <div class="output">
-      <div class="previous_operand"></div>
-      <div class="current_operand"></div>
+      <div id="prevOp" class="previous_operand"></div>
+      <div id="curOp" class="current_operand"></div>
     </div>
-    <button class="span_two">AC</button>
-    <button>DEL</button>
-    <button>÷</button>
-    <button>7</button>
-    <button>8</button>
-    <button>9</button>
-    <button>*</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>+</button>
-    <button>1</button>
-    <button>2</button>
-    <button>3</button>
-    <button>-</button>
-    <button>0</button>
+    <button class="span_two" onclick="allClear()">AC</button>
+    <button onclick="backspace()">DEL</button>
+    <button onclick="operand('/')">÷</button>
+    <button onclick="writeNumber(7)">7</button>
+    <button onclick="writeNumber(8)">8</button>
+    <button onclick="writeNumber(9)">9</button>
+    <button onclick="operand('*')">*</button>
+    <button onclick="writeNumber(4)">4</button>
+    <button onclick="writeNumber(5)">5</button>
+    <button onclick="writeNumber(6)">6</button>
+    <button onclick="operand('+')">+</button>
+    <button onclick="writeNumber(1)">1</button>
+    <button onclick="writeNumber(2)">2</button>
+    <button onclick="writeNumber(3)">3</button>
+    <button onclick="operand('-')">-</button>
+    <button onclick="writeNumber(0)">0</button>
     <button>.</button>
-    <button class="span_two">=</button>
+    <button class="span_two" onclick="evaluateExpr()">=</button>
   </div>
+  
+  <script>
+    var res = "";
+    var cache = "";
+    var operands = "";
+    
+    function writeNumber(n)
+    {
+     res += n;
+    document.getElementById("curOp").innerHTML = res;
+    }
+    
+    function operand(op)
+    {
+      if (operands != "") {
+        evaluateExpr();
+        operands = "";
+      }
+      res = document.getElementById("prevOp").innerHTML + document.getElementById("curOp").innerHTML;
+      operands += op;
+      res += op;
+      document.getElementById("prevOp").innerHTML = res;
+      document.getElementById("curOp").innerHTML = "";
+      res = "";
+      cache = document.getElementById("prevOp").innerHTML;
+      
+      }
+      
+    function evaluateExpr()
+    {
+     <!--  rounding to 5 decimals -->
+      document.getElementById("curOp").innerHTML = Math.round(eval(cache + res)*100000)/100000;
+      res = "";
+      cache = "";
+      operands = "";
+      document.getElementById("prevOp").innerHTML = "";
+    }
+    
+    function allClear()
+    {
+      res = "";
+      cache = "";
+      operands = "";
+      document.getElementById("prevOp").innerHTML = "";
+      document.getElementById("curOp").innerHTML = "";
+    }
+    
+    function backspace()
+    {
+    res = res.slice(0,-1); document.getElementById("curOp").innerHTML = res;
+    }
+  </script>
 </body>
 </html>
