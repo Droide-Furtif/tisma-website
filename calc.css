@@ -3,11 +3,13 @@
     justify-content: center;
     align-items: center;
     min-height: 45vh;
-    min-width: 380px;
-    max-width: 380px;
+    max-width: 370px;
+    margin: 20px;
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: minmax(120px, auto) repeat(5, 80px);
-    margin-bottom: 50px;
+   padding-bottom: 15px;
+   background-color: #121224;
+  border-radius: 14px;
 }
 
 .calc_grid > button {
@@ -16,13 +18,14 @@
   font-size: 2rem;
   border: 1px, solid #FFFFFF;
   outline: none;
-  background-color: #A8DADC;
+  background-color: #3b476b;
   height: 100%;
+  border-radius: 6px;
 }
 
 .output {
   grid-column: 1 / -1;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(255, 255, 255, 0.75);
   display: flex;
   align-items: flex-end;
   justify-content: space-around;
@@ -31,19 +34,23 @@
   word-wrap: break-word;
   word-break: break-all;
   min-height: 70px;
+  border: white 2px solid;
+  border-radius: 8px;
 }
 
 .output .previous_operand {
-  color: rgba(255,255, 255, 0.60);
+  color: #393939;
   font-size: 1.2rem;
 }
 
 .output .current_operand{
-  color: white;
+  color: #141414;
   font-size: 2.5rem;
 }
 
 .span_two {
   grid-column: span 2;
-  background-color: #457B9D !important;
+  background-color: #392c4c !important;
+  font-size: 2.5rem !important;
 }
+
