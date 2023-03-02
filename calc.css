@@ -2,8 +2,8 @@
   display: grid;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
-    max-width: 30vh;
+    min-height: 75vh;
+    max-width: 55vh;
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: minmax(120px, auto) repeat(5, 80px);
     margin-bottom: 50px;
