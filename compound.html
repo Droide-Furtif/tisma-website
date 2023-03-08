@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compound Interests</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    input {
+      max-width: 20%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="calc.html">Calc</a></li>
+        <li><a href="jstest.html">JsTest</a></li>
+        <li><a class="active" href="compound.html">Interests</a></li>
+      </ul>
+        
+    </nav>
+  </header>
+  
+  <form onsubmit="return false;">
+    <label> Capital invested on 1st year: 
+      <input type="number" id="baseInvest">
+    </label>
+    <p>
+      Capital invested every ... :
+    </p>
+    <label> Year
+      <input type="number" id="yearlyInvest">
+    </label>
+    <label>  OR  Month 
+      <input type="number" id="monthlyInvest">
+    </label>
+    <br>
+    <label> Yearly Rate (%)
+      <input type="number" id="rate">
+    </label>
+    <br>
+    <button type="button "onclick="calculate()">Calculate</button>
+  </form>
+  
+  <div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+  var labelArray = [];
+  var dataArray = [];
+
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labelArray,
+      datasets: [{
+        label: '€',
+        data: dataArray,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+  
+  
+  function calculate()
+  {
+    var base = parseInt(document.getElementById("baseInvest").value);
+    var yearly = parseInt(document.getElementById("yearlyInvest").value) + parseInt(document.getElementById("monthlyInvest").value *12);
+    var rate = parseInt(document.getElementById("rate").value);
+    
+    labelArray.length = 0;
+    dataArray.length = 0;
+   for (var i=0; i<50; i++)
+   {
+     temp = (base+yearly*i)*(1+rate/100)**i;
+     dataArray.push(parseInt(temp));
+     labelArray.push(i);
+   }
+   chart.update();
+  }
+</script>
+ 
+  
+</body>
+</html>
