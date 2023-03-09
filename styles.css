@@ -60,4 +60,6 @@ li a:hover {
   background-color: #4040B0;
 }
 
-
+form {
+  line-height: 3;
+}

@@ -28,10 +28,10 @@
     <label> Capital invested on 1st year: 
       <input type="number" id="baseInvest">
     </label>
-    <p>
+    <p style="max-height: 8px;">
       Capital invested every ... :
     </p>
-    <label> Year
+    <label> Year 
       <input type="number" id="yearlyInvest">
     </label>
     <label>  OR  Month 
@@ -41,11 +41,11 @@
     <label> Yearly Rate (%)
       <input type="number" id="rate">
     </label>
-    <br>
+    <br> 
     <button type="button "onclick="calculate()">Calculate</button>
   </form>
   
-  <div>
+  <div style="max-width: 600px; max-height: 350px">
   <canvas id="myChart"></canvas>
 </div>
 
@@ -54,17 +54,26 @@
 <script>
   const ctx = document.getElementById('myChart');
   var labelArray = [];
-  var dataArray = [];
+  var capitalArray = [];
+  var investmentArray = [];
 
   chart = new Chart(ctx, {
     type: 'line',
-    data: {
+    data: {      
       labels: labelArray,
       datasets: [{
-        label: '€',
-        data: dataArray,
-        borderWidth: 1
-      }]
+        label: '€ Total',
+        data: capitalArray,
+        borderWidth: 1,
+        backgroundColor: "#FF2020",
+      },
+      {
+        label: '€ Investis',
+        data: investmentArray,
+        borderWidth: 1,
+        backgroundColor: "#2020FF",
+      }
+    ]
     },
     options: {
       scales: {
@@ -79,16 +88,17 @@
   function calculate()
   {
     var base = parseInt(document.getElementById("baseInvest").value);
-    var yearly = parseInt(document.getElementById("yearlyInvest").value) + parseInt(document.getElementById("monthlyInvest").value *12);
+    var yearly = parseInt(document.getElementById("yearlyInvest").value*1) + parseInt(document.getElementById("monthlyInvest").value *12) ;
     var rate = parseInt(document.getElementById("rate").value);
-    
     labelArray.length = 0;
-    dataArray.length = 0;
-   for (var i=0; i<50; i++)
+    capitalArray.length = 0;
+    investmentArray.length = 0;
+    for (var i=0; i<30; i++)
    {
      temp = (base+yearly*i)*(1+rate/100)**i;
-     dataArray.push(parseInt(temp));
+     capitalArray.push(parseInt(temp));
      labelArray.push(i);
+     investmentArray.push(base + yearly*i);
    }
    chart.update();
   }
